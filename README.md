@@ -14,5 +14,5 @@ You may also see any lint errors in the console.
 
 Run below commands
 
-docker build -t file-vault-ui .
+docker build -t file-vault-ui . \
 docker run -p 3000:3000 file-vault-ui
