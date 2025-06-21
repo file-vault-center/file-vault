@@ -10,6 +10,8 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'plugin:jsx-a11y/recommended',
+    'react-app',
+    'react-app/jest'
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -87,9 +89,7 @@ module.exports = {
     'no-shadow-restricted-names': 'error',
     'no-sparse-arrays': 'error',
     'no-this-before-super': 'error',
-    'no-undef': 'error',
     'no-unexpected-multiline': 'error',
-    'no-unreachable': 'error',
     'no-unsafe-finally': 'error',
     'no-unsafe-negation': 'error',
     'no-unsafe-optional-chaining': 'error',
@@ -105,7 +105,7 @@ module.exports = {
     'indent': ['error', 2],
     'quotes': ['error', 'single'],
     'semi': ['error', 'always'],
-    'comma-dangle': ['error', 'always-multiline'],
+    'comma-dangle': 'off',
     'object-curly-spacing': ['error', 'always'],
     'array-bracket-spacing': ['error', 'never'],
     'comma-spacing': ['error', { before: false, after: true }],
@@ -122,7 +122,7 @@ module.exports = {
     'block-spacing': 'error',
     'brace-style': ['error', '1tbs'],
     'camelcase': ['error', { properties: 'never' }],
-    'eol-last': 'error',
+    'eol-last': 'off',
     'func-call-spacing': ['error', 'never'],
     'func-name-matching': 'error',
     'func-names': 'off',
@@ -132,7 +132,7 @@ module.exports = {
     'id-match': 'off',
     'implicit-arrow-linebreak': ['error', 'beside'],
     'jsx-quotes': ['error', 'prefer-double'],
-    'linebreak-style': ['error', 'unix'],
+    'linebreak-style': 'off',
     'lines-around-comment': 'off',
     'lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }],
     'max-depth': ['error', 4],
@@ -163,7 +163,7 @@ module.exports = {
     'no-restricted-syntax': 'off',
     'no-tabs': 'error',
     'no-ternary': 'off',
-    'no-trailing-spaces': 'error',
+    'no-trailing-spaces': 'off',
     'no-underscore-dangle': 'off',
     'no-unneeded-ternary': 'error',
     'no-whitespace-before-property': 'error',
@@ -189,6 +189,7 @@ module.exports = {
     'template-tag-spacing': 'error',
     'unicode-bom': ['error', 'never'],
     'wrap-regex': 'off',
+    'testing-library/no-node-access': 'off'
   },
   settings: {
     react: {

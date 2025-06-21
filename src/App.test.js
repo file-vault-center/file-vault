@@ -11,12 +11,36 @@ jest.mock('sweetalert2', () => ({
 }));
 
 // Mock the components that are rendered by the router
-jest.mock('./UploadComponent', () => () => <div>UploadComponent</div>);
-jest.mock('./Download', () => () => <div>Download</div>);
-jest.mock('./UploadMetadata', () => () => <div>UploadMetadata</div>);
-jest.mock('./UploadDocument', () => () => <div>UploadDocument</div>);
-jest.mock('./SoftDelete', () => () => <div>SoftDelete</div>);
-jest.mock('./VersionRollback', () => () => <div>VersionRollback</div>);
+jest.mock('./UploadComponent', () => {
+  const MockUploadComponent = () => <div>UploadComponent</div>;
+  MockUploadComponent.displayName = 'MockUploadComponent';
+  return MockUploadComponent;
+});
+jest.mock('./Download', () => {
+  const MockDownload = () => <div>Download</div>;
+  MockDownload.displayName = 'MockDownload';
+  return MockDownload;
+});
+jest.mock('./UploadMetadata', () => {
+  const MockUploadMetadata = () => <div>UploadMetadata</div>;
+  MockUploadMetadata.displayName = 'MockUploadMetadata';
+  return MockUploadMetadata;
+});
+jest.mock('./UploadDocument', () => {
+  const MockUploadDocument = () => <div>UploadDocument</div>;
+  MockUploadDocument.displayName = 'MockUploadDocument';
+  return MockUploadDocument;
+});
+jest.mock('./SoftDelete', () => {
+  const MockSoftDelete = () => <div>SoftDelete</div>;
+  MockSoftDelete.displayName = 'MockSoftDelete';
+  return MockSoftDelete;
+});
+jest.mock('./VersionRollback', () => {
+  const MockVersionRollback = () => <div>VersionRollback</div>;
+  MockVersionRollback.displayName = 'MockVersionRollback';
+  return MockVersionRollback;
+});
 
 describe('App', () => {
   it('renders the loading screen and then the main app', async () => {
@@ -40,7 +64,7 @@ describe('App', () => {
 
   it('renders navigation links', async () => {
     render(<App />);
-    
+
     // Wait for loading to complete
     await waitFor(() => {
       expect(screen.getByText('File Vault')).toBeInTheDocument();
