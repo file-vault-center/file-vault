@@ -1,0 +1,470 @@
+.upload-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', sans-serif;
+  position: relative;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.App.dark-mode .upload-container {
+  background: #2d2d2d;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.upload-container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.App.dark-mode .upload-container h2 {
+  color: #e0e0e0;
+}
+
+.network-status {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  z-index: 2;
+}
+
+.net-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-right: 6px;
+  border: 2px solid #888;
+}
+
+.net-high {
+  background: #4caf50;
+  border-color: #388e3c;
+}
+
+.net-medium {
+  background: #ffeb3b;
+  border-color: #fbc02d;
+}
+
+.net-low {
+  background: #d32f2f;
+  border-color: #b71c1c;
+}
+
+.net-unknown {
+  background: #bdbdbd;
+  border-color: #888;
+}
+
+.net-label {
+  font-size: 0.95em;
+  color: #444;
+}
+
+/* Dark mode toggle button */
+.dark-mode-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.dark-mode-toggle:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode-toggle svg {
+  width: 20px;
+  height: 20px;
+  color: #333;
+  transition: color 0.2s ease;
+}
+
+.metadata-input {
+  width: 100%;
+  min-height: 80px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.App.dark-mode .metadata-input {
+  background: #3d3d3d;
+  border-color: #555;
+  color: #e0e0e0;
+}
+
+.metadata-input:focus {
+  outline: none;
+  border-color: #1976d2;
+  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.1);
+}
+
+.App.dark-mode .metadata-input:focus {
+  border-color: #64b5f6;
+  box-shadow: 0 0 0 2px rgba(100, 181, 246, 0.2);
+}
+
+.file-input {
+  width: 100%;
+  padding: 12px;
+  border: 2px dashed #ddd;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  background: #fafafa;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.App.dark-mode .file-input {
+  background: #3d3d3d;
+  border-color: #555;
+  color: #e0e0e0;
+}
+
+.file-input:hover {
+  border-color: #1976d2;
+  background: #f0f8ff;
+}
+
+.App.dark-mode .file-input:hover {
+  background: #4a4a4a;
+  border-color: #64b5f6;
+}
+
+.file-input:focus {
+  outline: none;
+  border-color: #1976d2;
+  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.1);
+}
+
+.App.dark-mode .file-input:focus {
+  border-color: #64b5f6;
+  box-shadow: 0 0 0 2px rgba(100, 181, 246, 0.2);
+}
+
+.auth-input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.upload-btn {
+  width: 100%;
+  padding: 12px 20px;
+  background: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  margin-bottom: 10px;
+}
+
+.upload-btn:hover:not(:disabled) {
+  background: #1565c0;
+  transform: translateY(-1px);
+}
+
+.upload-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.upload-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 20px;
+  background: #f0f0f0;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  margin: 10px 0;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.App.dark-mode .progress-bar-container {
+  background: #3d3d3d;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #1976d2, #42a5f5);
+  border-radius: 10px;
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+.progress-bar-container span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.App.dark-mode .progress-bar-container span {
+  color: #e0e0e0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.upload-success {
+  color: #388e3c;
+  margin-top: 10px;
+}
+
+.upload-error {
+  color: #d32f2f;
+  background: #ffebee;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+  font-size: 14px;
+  border-left: 4px solid #d32f2f;
+  transition: background-color 0.3s ease, color 0.3s ease, border-left-color 0.3s ease;
+}
+
+.App.dark-mode .upload-error {
+  background-color: #5d3434;
+  border-color: #e57373;
+}
+
+/* Chunk size label styling */
+.chunk-size-label {
+  font-weight: 500;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.App.dark-mode .chunk-size-label {
+  color: #e0e0e0;
+}
+
+/* Base styles for the flex container of chunk size selection */
+.chunk-size-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.chunk-size-container .chunk-size-label {
+  flex-shrink: 0; /* Prevent the label from shrinking */
+}
+
+.chunk-size-container select {
+  flex-grow: 1; /* Allow the select box to take remaining space */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+/* SweetAlert2 custom styles */
+.swal2-file-preview-popup {
+  max-width: 90vw !important;
+}
+
+.swal2-file-preview-popup .swal2-title {
+  font-size: 1.25em !important;
+}
+
+.swal2-file-preview-popup .swal2-html-container {
+  max-height: 70vh !important;
+  overflow-y: auto !important;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .upload-container {
+    padding: 20px;
+    margin: 1rem;
+  }
+
+  .upload-container h2 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+  }
+
+  .dark-mode-toggle {
+    top: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+  }
+
+  .dark-mode-toggle svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .metadata-input,
+  .file-input,
+  .upload-btn {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .progress-bar-container {
+    height: 18px;
+    margin: 8px 0;
+  }
+
+  .progress-bar-container span {
+    font-size: 11px;
+  }
+
+  /* Make chunk selector stack vertically */
+  .chunk-size-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .chunk-size-container .chunk-size-label {
+    margin-bottom: 5px;
+  }
+
+  .chunk-size-container select {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .upload-container {
+    padding: 15px;
+    margin: 0.5rem;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+  }
+
+  .upload-container h2 {
+    font-size: 1.3rem;
+  }
+
+  .dark-mode-toggle {
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .dark-mode-toggle svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .metadata-input {
+    min-height: 60px;
+    font-size: 13px;
+  }
+
+  .file-input,
+  .upload-btn {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  .progress-bar-container {
+    height: 16px;
+    margin: 6px 0;
+  }
+
+  .progress-bar-container span {
+    font-size: 10px;
+  }
+
+  .upload-error {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  /* Make chunk selector stack vertically */
+  .chunk-size-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .chunk-size-container .chunk-size-label {
+    margin-bottom: 5px;
+  }
+
+  .chunk-size-container select {
+    width: 100%;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .upload-container {
+    border: 2px solid #000;
+  }
+
+  .metadata-input,
+  .file-input {
+    border-width: 2px;
+  }
+
+  .upload-btn {
+    border: 2px solid #000;
+  }
+
+  .progress-bar {
+    background: #000;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .upload-btn,
+  .progress-bar,
+  .metadata-input,
+  .file-input,
+  .dark-mode-toggle {
+    transition: none;
+  }
+
+  .upload-btn:hover:not(:disabled) {
+    transform: none;
+  }
+}
