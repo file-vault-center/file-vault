@@ -1,0 +1,265 @@
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #fff;
+  border-bottom: 1px solid #eaeaea;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease, border-bottom-color 0.3s ease;
+}
+
+.App.dark-mode .app-header {
+  background-color: #2d2d2d;
+  border-bottom-color: #3d3d3d;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo {
+  height: 40px;
+  width: auto;
+  margin-right: 1rem;
+}
+
+.navbar-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #222;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.App.dark-mode .navbar-title {
+  color: #e0e0e0;
+}
+
+.navbar-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dark-mode-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.dark-mode-toggle:hover {
+  background-color: #f0f0f0;
+}
+
+.App.dark-mode .dark-mode-toggle:hover {
+  background-color: #3d3d3d;
+}
+
+.dark-mode-toggle svg {
+  width: 20px;
+  height: 20px;
+  color: #333;
+  transition: color 0.2s ease;
+}
+
+.App.dark-mode .dark-mode-toggle svg {
+  color: #e0e0e0;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1.5rem;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+  position: relative;
+}
+
+.navbar-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background-color: #1976d2;
+  transition: width 0.3s ease-in-out;
+}
+
+.navbar-links a.active {
+  color: #1976d2;
+}
+
+.navbar-links a.active::after {
+  width: 100%;
+}
+
+.App.dark-mode .navbar-links a {
+  color: #aaa;
+}
+
+.App.dark-mode .navbar-links a:hover {
+  color: #fff;
+  background-color: #3d3d3d;
+}
+
+.App.dark-mode .navbar-links a.active {
+  color: #64b5f6;
+}
+
+.App.dark-mode .navbar-links a.active::after {
+  background-color: #64b5f6;
+}
+
+.token-btn {
+  background-color: #1976d2;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.token-btn:hover {
+  background-color: #1565c0;
+  transform: translateY(-1px);
+}
+
+.App.dark-mode .token-btn {
+  background-color: #64b5f6;
+  color: #1a1a1a;
+}
+
+.App.dark-mode .token-btn:hover {
+  background-color: #81c784;
+}
+
+.hamburger-menu {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+  z-index: 1001;
+}
+
+.hamburger-menu svg {
+  width: 28px;
+  height: 28px;
+  color: #333;
+}
+
+.App.dark-mode .hamburger-menu svg {
+  color: #e0e0e0;
+}
+
+.navbar-collapse {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+@media (max-width: 1024px) {
+  .app-header {
+    flex-wrap: wrap;
+  }
+
+  .navbar-collapse {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+  .App.dark-mode .navbar-collapse {
+    background-color: #2d2d2d;
+  }
+  
+  .navbar-collapse.open {
+    display: flex;
+  }
+
+  .navbar-links {
+    flex-direction: column;
+    width: 100%;
+    gap: 0;
+    align-items: stretch;
+  }
+  
+  .navbar-links a {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid #eaeaea;
+  }
+
+  .App.dark-mode .navbar-links a {
+    border-bottom-color: #3d3d3d;
+  }
+  
+  .navbar-links a:last-child {
+    border-bottom: none;
+  }
+
+  .navbar-links a::after {
+    display: none;
+  }
+  
+  .navbar-controls {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .hamburger-menu {
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: 1rem;
+  }
+
+  .navbar-title {
+    font-size: 1.5rem;
+  }
+  
+  .navbar-brand {
+    flex-grow: 1;
+  }
+}

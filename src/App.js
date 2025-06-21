@@ -1,30 +1,70 @@
-import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import UploadComponent from "./UploadComponent";
+import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import './App.css';
+import Navbar from './Navbar';
+import logo from './file-vault-center.png';
+import UploadComponent from './UploadComponent';
+import Download from './Download';
+import UploadMetadata from './UploadMetadata';
+import UploadDocument from './UploadDocument';
+import SoftDelete from './SoftDelete';
+import VersionRollback from './VersionRollback';
+import Swal from 'sweetalert2';
 
-function App() {
+const App = () => {
   const [loading, setLoading] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false); // Default is light mode
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 5000); // Show loader for 5 secs
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
   }, []);
 
+  const toggleDarkMode = () => {
+    setIsDarkMode(prevMode => !prevMode);
+  };
+
+  const handleGenerateToken = () => {
+    const token = crypto.randomUUID();
+    sessionStorage.setItem('authToken', token);
+    Swal.fire({
+      icon: 'success',
+      title: 'Token Generated!',
+      text: 'Your session token has been generated and stored.',
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+    });
+  };
+
   return (
-    <div className="App">
-      {loading ? (
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>File Vault is reloading...</p>
-        </header>
-      ) : (
-        <div className="Main-body">
-          <h1 className="left-align">File Vault</h1>
-          <UploadComponent />
-        </div>
-      )}
-    </div>
+    <Router>
+      <div className={`App ${isDarkMode ? 'dark-mode' : ''}`}>
+        {loading && (
+          <div className="loader-overlay">
+            <img src={logo} className="App-logo" alt="logo" />
+            <p>Loading File Vault...</p>
+          </div>
+        )}
+        <Navbar isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} onGenerateToken={handleGenerateToken} />
+        <main className="app-content">
+          <Routes>
+            <Route path="/" element={<Navigate to="/upload" />} />
+            <Route path="/upload" element={<UploadComponent />} />
+            <Route path="/download" element={<Download />} />
+            <Route path="/upload-metadata" element={<UploadMetadata />} />
+            <Route path="/upload-document" element={<UploadDocument />} />
+            <Route path="/soft-delete" element={<SoftDelete />} />
+            <Route path="/version-rollback" element={<VersionRollback />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
