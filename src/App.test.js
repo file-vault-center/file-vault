@@ -1,7 +1,7 @@
 // Copyright (c) 2024 The File Vault Authors. All rights reserved.
 // Use of this source code is governed by a MIT license that can be found in the LICENSE file.
 
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, act } from '@testing-library/react';
 import App from './App';
 
 // Mock SweetAlert2 to prevent CSS injection issues
@@ -43,32 +43,49 @@ jest.mock('./VersionRollback', () => {
 });
 
 describe('App', () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
+
+  afterEach(() => {
+    jest.runOnlyPendingTimers();
+    jest.useRealTimers();
+  });
+
   it('renders the loading screen and then the main app', async () => {
     render(<App />);
 
     // Initially, the loader should be visible
     expect(screen.getByText(/loading file vault/i)).toBeInTheDocument();
 
+    // Fast-forward time to trigger the loading timeout
+    act(() => {
+      jest.advanceTimersByTime(1500);
+    });
+
     // Wait for the loading timeout to complete and the main content to appear
     await waitFor(() => {
       expect(screen.getByText('File Vault')).toBeInTheDocument();
-    }, { timeout: 3000 });
+    });
 
     expect(screen.getByText('UploadComponent')).toBeInTheDocument();
 
-    // Wait a bit more for the loader to disappear
-    await waitFor(() => {
-      expect(screen.queryByText(/loading file vault/i)).not.toBeInTheDocument();
-    }, { timeout: 1000 });
+    // The loader should now be gone
+    expect(screen.queryByText(/loading file vault/i)).not.toBeInTheDocument();
   });
 
   it('renders navigation links', async () => {
     render(<App />);
 
+    // Fast-forward time to trigger the loading timeout
+    act(() => {
+      jest.advanceTimersByTime(1500);
+    });
+
     // Wait for loading to complete
     await waitFor(() => {
       expect(screen.getByText('File Vault')).toBeInTheDocument();
-    }, { timeout: 3000 });
+    });
 
     // Check that navigation elements are present
     expect(screen.getByText('Generate Token')).toBeInTheDocument();
