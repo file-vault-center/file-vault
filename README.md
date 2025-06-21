@@ -217,4 +217,4 @@ For support and questions:
 
 ---
 
-**Made with ❤️ for reliable file uploads**
+**Made with ❤️ for File Vault**
