@@ -1,0 +1,46 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+
+# 1. Name of the workflow
+name: Node.js CI
+
+# 2. When the workflow should run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+# 3. The jobs to run as part of the workflow
+jobs:
+  # A single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # The steps that make up the job
+    steps:
+      # Step 1: Checks out your repository's code so the job can access it
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Sets up the specified version of Node.js
+      # Your package.json specifies node >=16.0.0, so we'll use Node.js 20.x
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm' # This caches dependencies to speed up future runs
+
+      # Step 3: Installs project dependencies using 'npm ci' for faster, reliable installs
+      - name: Install dependencies
+        run: npm ci
+
+      # Step 4: Runs the linter to check for code style issues
+      - name: Run linter
+        run: npm run lint
+
+      # Step 5: Runs the test suite
+      - name: Run tests
+        run: npm test
