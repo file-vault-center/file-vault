@@ -1,3 +1,6 @@
+// Copyright (c) 2024 The File Vault Authors. All rights reserved.
+// Use of this source code is governed by a MIT license that can be found in the LICENSE file.
+
 import { useState, useRef, useEffect } from 'react';
 import { Upload } from 'tus-js-client';
 import Swal from 'sweetalert2';
